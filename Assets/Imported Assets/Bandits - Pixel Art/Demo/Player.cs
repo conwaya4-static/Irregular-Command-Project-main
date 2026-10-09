@@ -131,6 +131,7 @@ public class Player : MonoBehaviour {
         // Left stick vertical: up = move left, down = move right
         Vector2 stick = context.ReadValue<Vector2>();
         m_moveInputX = stick.y;
+        Debug.Log("Moving");
     }
 
     void HandleModeSwitch()
