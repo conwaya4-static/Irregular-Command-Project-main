@@ -13,6 +13,7 @@ public class Player : MonoBehaviour {
     [SerializeField] int        attackDamage = 1;
     [SerializeField] float      attackRange = 1.6f;
     [SerializeField] float      attackHitDelay = 0.15f, attackCooldown = 0.3f;
+    [SerializeField] float      respawnDelay = 2f;
 
     private int                 health;
     private Animator            m_animator;
@@ -22,6 +23,7 @@ public class Player : MonoBehaviour {
     private bool                m_combatIdle = false;
     private bool                m_isDead = false;
     private float               m_nextAttack;
+    private Vector3             m_spawnPoint;
 
     PlayerControls controls;
     float m_moveInputX;
@@ -63,6 +65,7 @@ public class Player : MonoBehaviour {
         m_animator = GetComponent<Animator>();
         m_body2d = GetComponent<Rigidbody2D>();
         m_groundSensor = transform.Find("GroundSensor").GetComponent<Sensor_Bandit>();
+        m_spawnPoint = transform.position;
 
         if (healthSlider != null)
         {
@@ -103,6 +106,7 @@ public class Player : MonoBehaviour {
         if (health <= 0 && !m_isDead) {
             m_isDead = true;
             m_animator.SetTrigger("Death");
+            StartCoroutine(Respawn());
         }
         else if (health > 0 && m_isDead) {
             m_isDead = false;
@@ -176,6 +180,19 @@ public class Player : MonoBehaviour {
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
+    }
+
+    // After the death animation, send the player back to the start with full health
+    IEnumerator Respawn()
+    {
+        yield return new WaitForSeconds(respawnDelay);
+
+        transform.position = m_spawnPoint;
+        m_body2d.linearVelocity = Vector2.zero;
+        health = maxHealth;
+        if (healthSlider != null)
+            healthSlider.value = health;
+        // Update() sees health > 0 while dead and plays the Recover animation
     }
 
     // Called by the enemy when its attack lands
