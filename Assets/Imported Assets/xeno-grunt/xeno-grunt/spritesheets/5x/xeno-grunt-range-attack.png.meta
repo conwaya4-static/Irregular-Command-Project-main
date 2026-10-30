@@ -1,12 +1,15 @@
 fileFormatVersion: 2
 guid: f599fbc13d0759441aa28fd7202db1cf
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 9054283897674080488
+    second: xeno-grunt-range-attack_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -37,13 +40,13 @@ TextureImporter:
     filterMode: 1
     aniso: 1
     mipBias: 0
-    wrapU: 0
-    wrapV: 0
+    wrapU: 1
+    wrapV: 1
     wrapW: 0
-  nPOTScale: 1
+  nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 0
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
@@ -52,9 +55,9 @@ TextureImporter:
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
-  alphaIsTransparency: 0
+  alphaIsTransparency: 1
   spriteTessellationDetail: -1
-  textureType: 0
+  textureType: 8
   textureShape: 1
   singleChannelComponent: 0
   flipbookRows: 1
@@ -173,12 +176,166 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: xeno-grunt-range-attack_0
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 0
+        width: 69
+        height: 100
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e02768bb3747ad70800000000000000
+      internalID: 9054283897674080488
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: xeno-grunt-range-attack_1
+      rect:
+        serializedVersion: 2
+        x: 389
+        y: 0
+        width: 68
+        height: 104
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d9943147fd50252408ad80aa4c18f111
+      internalID: 798802130
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: xeno-grunt-range-attack_2
+      rect:
+        serializedVersion: 2
+        x: 708
+        y: 0
+        width: 68
+        height: 105
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 86d48191dc9d6d147919157702c093ea
+      internalID: -1940339714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: xeno-grunt-range-attack_3
+      rect:
+        serializedVersion: 2
+        x: 1029
+        y: 0
+        width: 83
+        height: 103
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b7525213cc7e014ba19d193760ee7ff
+      internalID: 1885291243
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: xeno-grunt-range-attack_6
+      rect:
+        serializedVersion: 2
+        x: 1667
+        y: 0
+        width: 137
+        height: 103
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7edc03da83eb3d84292faaf2f38f1c44
+      internalID: -989884146
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: xeno-grunt-range-attack_8
+      rect:
+        serializedVersion: 2
+        x: 1988
+        y: 0
+        width: 75
+        height: 99
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 78eae43dffe94bc4a8a8fd9e642defe4
+      internalID: 1609989888
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: xeno-grunt-range-attack_4
+      rect:
+        serializedVersion: 2
+        x: 1346
+        y: 0
+        width: 115
+        height: 99
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 68a80de99a0f98a4e876aa063bc596a7
+      internalID: 473750914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 0dffd9f4c07955c439a5eefa7a749687
     internalID: 0
     vertices: []
     indices: 
@@ -186,8 +343,33 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     spriteCustomMetadata:
-      entries: []
-    nameFileIdTable: {}
+      entries:
+      - key: SpriteEditor.SliceSettings
+        value: '{"sliceOnImport":false,"gridCellCount":{"x":1.0,"y":1.0},"gridSpriteSize":{"x":64.0,"y":64.0},"gridSpriteOffset":{"x":0.0,"y":0.0},"gridSpritePadding":{"x":0.0,"y":0.0},"pivot":{"x":0.5,"y":0.5},"pivotPixels":{"x":0.0,"y":0.0},"autoSlicingMethod":0,"spriteAlignment":0,"pivotUnitMode":0,"slicingType":0,"keepEmptyRects":false,"isAlternate":false}'
+    nameFileIdTable:
+      xeno-grunt-range-attack_0: 9054283897674080488
+      xeno-grunt-range-attack_1: 798802130
+      xeno-grunt-range-attack_10: -1231446913
+      xeno-grunt-range-attack_11: 1850563570
+      xeno-grunt-range-attack_12: 78175829
+      xeno-grunt-range-attack_13: -388420526
+      xeno-grunt-range-attack_14: 1645766062
+      xeno-grunt-range-attack_15: 716397153
+      xeno-grunt-range-attack_16: 1730987014
+      xeno-grunt-range-attack_17: -1976926247
+      xeno-grunt-range-attack_18: -556421543
+      xeno-grunt-range-attack_19: 1851241164
+      xeno-grunt-range-attack_2: -1940339714
+      xeno-grunt-range-attack_20: -327391182
+      xeno-grunt-range-attack_21: 428628653
+      xeno-grunt-range-attack_22: -895728976
+      xeno-grunt-range-attack_3: 1885291243
+      xeno-grunt-range-attack_4: 473750914
+      xeno-grunt-range-attack_5: -415042082
+      xeno-grunt-range-attack_6: -989884146
+      xeno-grunt-range-attack_7: 1932093919
+      xeno-grunt-range-attack_8: 1609989888
+      xeno-grunt-range-attack_9: 2025189596
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

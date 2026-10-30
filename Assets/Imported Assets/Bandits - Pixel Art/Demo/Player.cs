@@ -1,18 +1,29 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour {
 
     [SerializeField] float      m_speed = 4.0f;
     [SerializeField] float      m_jumpForce = 7.5f;
-    [SerializeField] int        health = 5;
+    [SerializeField] int        maxHealth = 10;
+    [SerializeField] Slider     healthSlider;
+    [SerializeField] int        attackDamage = 1;
+    [SerializeField] float      attackRange = 1.6f;
+    [SerializeField] float      attackHitDelay = 0.15f, attackCooldown = 0.3f;
+    [SerializeField] float      respawnDelay = 2f;
 
+    private int                 health;
     private Animator            m_animator;
     private Rigidbody2D         m_body2d;
     private Sensor_Bandit       m_groundSensor;
     private bool                m_grounded = false;
     private bool                m_combatIdle = false;
     private bool                m_isDead = false;
+    private float               m_nextAttack;
+    private Vector3             m_spawnPoint;
 
     PlayerControls controls;
     float m_moveInputX;
@@ -28,6 +39,7 @@ public class Player : MonoBehaviour {
     void Awake()
     {
         controls = new PlayerControls();
+        health = maxHealth;
     }
 
     void OnEnable()
@@ -53,9 +65,21 @@ public class Player : MonoBehaviour {
         m_animator = GetComponent<Animator>();
         m_body2d = GetComponent<Rigidbody2D>();
         m_groundSensor = transform.Find("GroundSensor").GetComponent<Sensor_Bandit>();
+        m_spawnPoint = transform.position;
+
+        if (healthSlider != null)
+        {
+            healthSlider.maxValue = maxHealth;
+            healthSlider.value = health;
+            healthSlider.interactable = false;   // display only: can't be selected or dragged
+        }
     }
 
 	void Update () {
+        // Don't react to the mic or input while the game is paused
+        if (Time.timeScale == 0f)
+            return;
+
         float loudness = 0f;
         if (detector != null)
             loudness = detector.GetLoudnessFromMicrophone() * loudnessSensitivity;
@@ -78,6 +102,22 @@ public class Player : MonoBehaviour {
             m_animator.SetBool("Grounded", m_grounded);
         }
 
+        // Death / Recover (fires once when health crosses zero)
+        if (health <= 0 && !m_isDead) {
+            m_isDead = true;
+            m_animator.SetTrigger("Death");
+            StartCoroutine(Respawn());
+        }
+        else if (health > 0 && m_isDead) {
+            m_isDead = false;
+            m_animator.SetTrigger("Recover");
+        }
+
+        if (m_isDead) {
+            m_body2d.linearVelocity = new Vector2(0f, m_body2d.linearVelocity.y);
+            return;
+        }
+
         // Stick up → left, stick down → right
         float inputX = m_moveInputX;
 
@@ -94,18 +134,11 @@ public class Player : MonoBehaviour {
         m_animator.SetFloat("AirSpeed", m_body2d.linearVelocity.y);
 
         // -- Handle Animations --
-        // Death
-        if (health == 0) {
-            if(!m_isDead)
-                m_animator.SetTrigger("Death");
-            else
-                m_animator.SetTrigger("Recover");
-
-            m_isDead = !m_isDead;
-        }
-        // Attack (voice, only in Attack mode)
-        else if (VoiceControl.CurrentMode == VoiceControlMode.Attack && voiceActive) {
+        // Attack: starts the moment a sound begins and plays out fully, even if the sound stops
+        if (VoiceControl.CurrentMode == VoiceControlMode.Attack && voiceJustActivated && Time.time >= m_nextAttack) {
+            m_nextAttack = Time.time + attackCooldown;
             m_animator.SetTrigger("Attack");
+            StartCoroutine(AttackHit());
         }
         // Jump (voice, only in Jump mode)
         else if (VoiceControl.CurrentMode == VoiceControlMode.Jump && voiceJustActivated && m_grounded) {
@@ -124,6 +157,55 @@ public class Player : MonoBehaviour {
         // Idle
         else
             m_animator.SetInteger("AnimState", 0);
+    }
+
+    // Damages every enemy within attackRange of the player shortly after the attack starts
+    IEnumerator AttackHit()
+    {
+        yield return new WaitForSeconds(attackHitDelay);
+        if (m_isDead) yield break;
+
+        var hit = new HashSet<EnemyScript>();
+        foreach (Collider2D c in Physics2D.OverlapCircleAll(transform.position, attackRange))
+        {
+            EnemyScript enemy = c.GetComponentInParent<EnemyScript>();
+            if (enemy != null && hit.Add(enemy))
+                enemy.TakeDamage(attackDamage);
+        }
+
+        Debug.Log(hit.Count > 0 ? "Player hit " + hit.Count + " enemy(s)" : "Player attack missed - no enemy in range");
+    }
+
+    void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
+    }
+
+    // After the death animation, send the player back to the start with full health
+    IEnumerator Respawn()
+    {
+        yield return new WaitForSeconds(respawnDelay);
+
+        transform.position = m_spawnPoint;
+        m_body2d.linearVelocity = Vector2.zero;
+        health = maxHealth;
+        if (healthSlider != null)
+            healthSlider.value = health;
+        // Update() sees health > 0 while dead and plays the Recover animation
+    }
+
+    // Called by the enemy when its attack lands
+    public void TakeDamage(int amount)
+    {
+        if (m_isDead) return;
+
+        health = Mathf.Max(health - amount, 0);
+        if (healthSlider != null)
+            healthSlider.value = health;
+
+        if (health > 0)
+            m_animator.SetTrigger("Hurt");
     }
 
     void OnMove(InputAction.CallbackContext context)
