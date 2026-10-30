@@ -1,0 +1,23 @@
+RAINWIRE ASSET LICENSE (v1.0)
+
+Thank you for getting a Rainwire pack. In plain terms:
+
+YOU MAY
+- Use these assets in any number of your own games, apps, videos and other projects, commercial or not.
+- Edit, recolor, crop and otherwise modify them for those projects.
+- Sell or give away the projects you make with them.
+Credit is not required, though "Art by Rainwire" is always appreciated.
+
+YOU MAY NOT
+- Resell, share, redistribute or sublicense the assets themselves, original or modified, alone or as part
+  of another asset pack, template, game kit, sprite library or similar collection. This applies to the
+  free packs too.
+- Claim the artwork as your own creation.
+- Use the assets, or anything derived from them, to train or fine-tune machine learning or AI models.
+- Use the assets as a logo or trademark.
+
+A finished game that ships the files inside it is fine. Posting the files themselves where others can
+download them is not.
+
+The assets are provided "as is", without warranty of any kind. Questions: leave a comment on the pack's
+itch.io page.

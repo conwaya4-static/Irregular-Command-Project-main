@@ -165,10 +165,14 @@ public class Player : MonoBehaviour {
         yield return new WaitForSeconds(attackHitDelay);
         if (m_isDead) yield break;
 
-        var hit = new HashSet<EnemyScript>();
+        var hit = new HashSet<IDamageable>();
         foreach (Collider2D c in Physics2D.OverlapCircleAll(transform.position, attackRange))
         {
-            EnemyScript enemy = c.GetComponentInParent<EnemyScript>();
+            // Hitting an enemy projectile sends it back at whoever fired it
+            EnemyProjectile bullet = c.GetComponent<EnemyProjectile>();
+            if (bullet != null) { bullet.Deflect(); continue; }
+
+            IDamageable enemy = c.GetComponentInParent<IDamageable>();
             if (enemy != null && hit.Add(enemy))
                 enemy.TakeDamage(attackDamage);
         }
