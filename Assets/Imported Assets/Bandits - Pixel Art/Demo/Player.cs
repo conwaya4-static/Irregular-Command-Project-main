@@ -68,6 +68,7 @@ public class Player : MonoBehaviour {
         {
             healthSlider.maxValue = maxHealth;
             healthSlider.value = health;
+            healthSlider.interactable = false;   // display only: can't be selected or dragged
         }
     }
 
