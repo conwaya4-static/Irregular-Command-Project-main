@@ -1,0 +1,34 @@
+{
+  "frame_width": 32,
+  "frame_height": 32,
+  "origin": [
+    16,
+    16
+  ],
+  "animations": {
+    "hover": {
+      "row": 0,
+      "frames": 4,
+      "fps": 12,
+      "loop": true
+    },
+    "charge": {
+      "row": 1,
+      "frames": 3,
+      "fps": 8,
+      "loop": false
+    },
+    "shoot": {
+      "row": 2,
+      "frames": 2,
+      "fps": 12,
+      "loop": false
+    },
+    "death": {
+      "row": 3,
+      "frames": 5,
+      "fps": 10,
+      "loop": false
+    }
+  }
+}

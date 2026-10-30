@@ -7,6 +7,9 @@ public class SceneTrigger : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        SceneManager.LoadScene(sceneIndex);
+        if (other.CompareTag("Player"))
+        {
+            SceneManager.LoadScene(sceneIndex);
+        }
     }
 }

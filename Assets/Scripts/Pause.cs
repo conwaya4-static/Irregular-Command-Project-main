@@ -8,9 +8,23 @@ public class Pause : MonoBehaviour
     public GameObject PausePanel;
     public GameObject firstSelected;   // optional: defaults to the sensitivity slider
     public Slider sensitivitySlider;
+    public Slider volumeSlider;
     public Player player;
 
     public bool isPaused = false;
+
+    void Awake()
+    {
+        if (volumeSlider != null)
+        {
+            // Smooth 0-1 range so volume can be anywhere between silent and full
+            volumeSlider.wholeNumbers = false;
+            volumeSlider.minValue = 0f;
+            volumeSlider.maxValue = 1f;
+            volumeSlider.value = AudioListener.volume;
+            volumeSlider.onValueChanged.AddListener(v => AudioListener.volume = v);
+        }
+    }
 
     void Start()
     {
